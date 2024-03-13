@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sist.last.mapper.RoomMapperInter">
+	
+	<insert id="insertRoom" parameterType="RoomDto">
+        insert into room(room_name,room_price,room_minpeople,room_maxpeople,room_location,room_photo,room_count,room_checkin,room_checkout,accom_num)
+        values (#{room_name},#{room_price},#{room_minpeople},#{room_maxpeople},#{room_location},#{room_photo},#{room_count},#{room_checkin},#{room_checkout},#{accom_num})
+    </insert>
+    
+    <select id="getAllData" parameterType="int" resultType="RoomDto">
+    	select * from room where accom_num=#{accom_num} order by room_price
+    </select>
+    
+    <select id="getData" resultType="RoomDto">
+    	select * from room where accom_num=#{accom_num}
+    </select>
+    
+    <select id="getTotalCount" resultType="int">
+        select count(*) from room where accom_num=#{accom_num}
+    </select>
+    
+    <delete id="deleteRoom" parameterType="int">
+  		delete from room where room_num=#{room_num}
+  	</delete>
+  	
+  	<select id="getOneData" parameterType="int" resultType="RoomDto">
+  		select * from room where room_num=#{room_num}
+  	</select>
+  	
+  	<update id="updateRoom" parameterType="RoomDto">
+  		update room set room_name=#{room_name},room_price=#{room_price},room_minpeople=#{room_minpeople},room_maxpeople=#{room_maxpeople},room_location=#{room_location},
+  		room_photo=#{room_photo},room_count=#{room_count},room_checkin=#{room_checkin},room_checkout=#{room_checkout} where room_num=#{room_num}
+  	</update>
+  	
+  	<select id="getAccomByRoom" parameterType="int" resultType="int">
+  		select room_num from room where accom_num=#{accom_num}
+  	</select>
+</mapper>

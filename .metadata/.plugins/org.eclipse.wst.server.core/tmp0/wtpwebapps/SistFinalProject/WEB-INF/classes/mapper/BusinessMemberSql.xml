@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="sist.last.mapper.BusinessMapperInter">
+ 
+ <select id="getTotalCountB" resultType="int">
+ select count(*) from businessman
+ </select>
+ 
+ <insert id="insertBusiness" parameterType="business">
+ insert into businessman(business_id, business_pass, business_name, business_company, business_hp, business_email) values(#{business_id},#{business_pass},#{business_name},#{business_company},#{business_hp},#{business_email})
+ </insert>
+ 
+ <select id="BloginPassCheck" parameterType="Map" resultType="int">
+ select count(*) from businessman where business_id=#{business_id} and business_pass=#{business_pass}
+ </select>
+ 
+ <select id="getSearchBusinessId" resultType="int" parameterType="String">
+ select count(*) from businessman where business_id=#{business_id}
+ </select>
+ 
+ <select id="getDataByBusinessId" resultType="business" parameterType="String">
+ select * from businessman where business_id=#{business_id}
+ </select>
+ 
+ <update id="updateBusiness" parameterType="business">
+ update businessman set business_company=#{business_company}, business_pass=#{business_pass},business_hp=#{business_hp}, business_email=#{business_email} where business_id=#{business_id}
+ </update>
+ 
+ <delete id="deleteBusiness" parameterType="String">
+ delete from businessman where business_id=#{business_id}
+ </delete>
+ 
+ <select id="getApprovalByBusinessId" resultType="int" parameterType="String">
+ select business_approval from businessman where business_id=#{business_id}
+ </select>
+ </mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="sist.last.mapper.MemberMapperInter">
+ 
+ <select id="getTotalCount" resultType="int">
+ select count(*) from info
+ </select>
+ 
+ <insert id="insertMember" parameterType="member">
+ insert into info(info_id, info_name, info_nickname, info_pass, info_hp, info_email, info_birth, info_gaipday) values(#{id},#{name},#{nickname},#{pass},#{hp},#{email},#{birth},now())
+ </insert>
+ 
+ <select id="loginPassCheck" parameterType="Map" resultType="int">
+ select count(*) from info where info_id=#{id} and info_pass=#{pass}
+ </select>
+ 
+ <select id="getSearchId" resultType="int" parameterType="String">
+ select count(*) from info where info_id=#{id}
+ </select>
+ 
+ <select id="getSearchNick" resultType="int" parameterType="String">
+ select count(*) from info where info_nickname=#{nickname}
+ </select>
+ 
+ <select id="getDataById" resultType="member" parameterType="String">
+ select * from info where info_id=#{id}
+ </select>
+ 
+ <select id="getNickname" resultType="String" parameterType="String">
+ select info_nickname from info where info_id=#{id}
+ </select>
+ 
+ <select id="getAllMembers" resultType="member">
+ select * from info order by info_id
+ </select>
+ 
+ </mapper>

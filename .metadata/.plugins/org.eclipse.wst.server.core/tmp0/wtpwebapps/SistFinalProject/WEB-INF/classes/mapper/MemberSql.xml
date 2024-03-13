@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="sist.last.mapper.MemberMapperInter">
+ 
+ <select id="getTotalCount" resultType="int">
+ select count(*) from info
+ </select>
+
+ <insert id="insertMember" parameterType="member">
+ insert into info(info_id, info_name, info_nickname, info_pass, info_hp, info_email, info_birth, info_gaipday) values(#{info_id},#{info_name},#{info_nickname},#{info_pass},#{info_hp},#{info_email},#{info_birth},now())
+ </insert>
+ 
+ <select id="loginPassCheck" parameterType="Map" resultType="int">
+ select count(*) from info where info_id=#{info_id} and info_pass=#{info_pass}
+ </select>
+ 
+ <select id="getSearchId" resultType="int" parameterType="String">
+ select count(*) from info where info_id=#{info_id}
+ </select>
+ 
+ <select id="getSearchNick" resultType="int" parameterType="String">
+ select count(*) from info where info_nickname=#{info_nickname}
+ </select>
+ 
+ <select id="getDataById" resultType="member" parameterType="String">
+ select * from info where info_id=#{info_id}
+ </select>
+ 
+ <select id="getNickname" resultType="String" parameterType="String">
+ select info_nickname from info where info_id=#{info_id}
+ </select>
+ 
+ <select id="getAllMembers" resultType="member">
+ select * from info order by info_id
+ </select>
+ 
+ <update id="updateMember" parameterType="member">
+ update info set info_pass=#{info_pass}, info_nickname=#{info_nickname}, info_hp=#{info_hp}, info_email=#{info_email}, info_birth=#{info_birth} where info_id=#{info_id}
+ </update>
+ 
+ <delete id="deleteMember" parameterType="String">
+ delete from info where info_id=#{info_id}
+ </delete>
+ 
+ <select id="getCouponCount" parameterType="String" resultType="int">
+ select count(info_coupon) from info where info_id=#{info_id}
+ </select>
+ 
+ <insert id="insertKakaoMember" parameterType="member">
+ insert into info values (#{info_id},"",#{info_nickname},"","","","",0,0,now())
+ </insert>
+ 
+ <select id="getSearchKakaoId" parameterType="String" resultType="int">
+ select count(*) from info where info_id = #{info_id}
+ </select>
+ 
+ <select id="getDataByKakaoId" resultType="member" parameterType="String">
+ select * from info where info_id = #{kakao_id}
+ </select>
+ 
+ <select id="getPasswordById" resultType="String" parameterType="String">
+ select info_pass from info where info_id = #{info_id}
+ </select>
+ 
+  <select id="getSearchNaverId" resultType="int" parameterType="String">
+ select count(*) from info where info_id = #{naver_id}
+ </select>
+ 
+ <select id="getDataByNaverId" resultType="member" parameterType="String">
+ select * from info where info_id = #{naver_nickname}
+ </select>
+ 
+  <insert id="insertNaverMember" parameterType="member">
+ insert into info values (#{naver_id},#{naver_name},#{naver_nickname},"",#{naver_hp},#{naver_email},"",0,0,now())
+ </insert>
+ 
+ </mapper>

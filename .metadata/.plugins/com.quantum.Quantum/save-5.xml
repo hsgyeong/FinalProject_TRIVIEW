@@ -1,0 +1,183 @@
+<?xml version="1.0" ?>
+<SAVED_DATA>
+	<bookmarks>
+		<jdbcDriver className="com.mysql.cj.jdbc.Driver" name="MySQL Connector/J" type="MYSQL" version="mysql-connector-j-8.1.0 (Revision: 7b6f9a337afe6ccb41823df485bf848ca7952b09)">
+			<jar fileName="C:\sist0615\util\mysql-connector-j-8.1.0.jar" />
+		</jdbcDriver>
+		<jdbcDriver className="org.apache.derby.jdbc.EmbeddedDriver" name="Apache Derby Embedded JDBC Driver" type="DERBY" version="10.3.1.4 - (561794)">
+			<jar fileName="C:/sist0615/util/sts-4.20.0.RELEASE/plugins/com.quantum.derby_3.3.10/lib/derby.jar" />
+		</jdbcDriver>
+		<bookmark>
+			<name>(Internal) Derby</name>
+			<username>QUANTUM</username>
+			<password />
+			<prompt>false</prompt>
+			<connect>jdbc:derby:C:/sist0615/util/sts-4.20.0.RELEASE/plugins/com.quantum.derby_3.3.10/data/quantum</connect>
+			<autoCommit>true</autoCommit>
+			<autoCommitPreference>Always True</autoCommitPreference>
+			<autoCommitIgnoreView>false</autoCommitIgnoreView>
+			<quoteAll>false</quoteAll>
+			<sendQueryAsIs>false</sendQueryAsIs>
+			<stripNewline>false</stripNewline>
+			<shutdownOnDisconnect>true</shutdownOnDisconnect>
+			<defaultEncoding />
+			<driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+			<type>DERBY</type>
+			<substituteVariables>false</substituteVariables>
+			<variablesRegexp>\$\{(.*?)\}</variablesRegexp>
+			<driverLocation>C:/sist0615/util/sts-4.20.0.RELEASE/plugins/com.quantum.derby_3.3.10/lib/derby.jar</driverLocation>
+			<Other_Schemas schemaRule="useAll" />
+			<quickList />
+			<queryList />
+		</bookmark>
+		<bookmark>
+			<name>sgyeong</name>
+			<username>sgyeong</username>
+			<password>1234</password>
+			<prompt>false</prompt>
+			<connect>jdbc:mysql://localhost:3306/coffee?serverTimezone=Asia/Seoul</connect>
+			<autoCommit>true</autoCommit>
+			<autoCommitPreference>Always True</autoCommitPreference>
+			<autoCommitIgnoreView>false</autoCommitIgnoreView>
+			<quoteAll>false</quoteAll>
+			<sendQueryAsIs>false</sendQueryAsIs>
+			<stripNewline>false</stripNewline>
+			<shutdownOnDisconnect>false</shutdownOnDisconnect>
+			<defaultEncoding />
+			<driver>com.mysql.cj.jdbc.Driver</driver>
+			<type>MYSQL</type>
+			<substituteVariables>false</substituteVariables>
+			<variablesRegexp>\$\{(.*?)\}</variablesRegexp>
+			<driverLocation>C:\sist0615\util\mysql-connector-j-8.1.0.jar</driverLocation>
+			<Other_Schemas schemaRule="useAll" />
+			<quickList />
+			<queryList>
+				<query>
+					<queryString>select * from smartshop</queryString>
+				</query>
+				<query>
+					<queryString>create table reminiboard(num int auto_increment primary key, 
+id varchar(30),
+name varchar(20),
+subject varchar(200),
+content varchar(1000),
+photo varchar(1000),
+readcount int default 0,
+likes int default 0,
+regroup int,
+restep int,
+relevel int,
+writeday datetime)</queryString>
+				</query>
+				<query>
+					<queryString>select ifnull (max(num),0) from reminiboard</queryString>
+				</query>
+				<query>
+					<queryString>select * from reminiboard</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM reminiboard WHERE (num = 1)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM reminiboard WHERE (num = 2)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM reminiboard WHERE (num = 4)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM reminiboard WHERE (num = 5)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM reminiboard WHERE (num = 7)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM reminiboard WHERE (num = 9)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM market WHERE (num = 7)</queryString>
+				</query>
+				<query>
+					<queryString>create table info(info_id varchar(30) primary key, 
+info_name varchar(20),
+info_nickname varchar(30), 
+info_pass varchar(50), 
+info_hp varchar(50),
+info_email varchar(100),
+info_birth varchar(30),
+info_gaipday datetime
+)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM reminiboard WHERE (num = 11)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM reminiboard WHERE (num = 13)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM ipgo WHERE (num = 1)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM ipgo WHERE (num = 3)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM ipgo WHERE (num = 4)</queryString>
+				</query>
+				<query>
+					<queryString>DELETE FROM ipgo WHERE (num = 2)</queryString>
+				</query>
+				<query>
+					<queryString>insert into info values(&quot;sgyeong&quot;, &quot;성경&quot;, &quot;sg&quot;, 1234, &quot;010-1111-2222&quot;, &quot;sg@gmail.com&quot;, &quot;1997-08-23&quot;, now())</queryString>
+				</query>
+				<query>
+					<queryString>create table businessman (business_id varchar(20) primary key not null,
+business_pass varchar(50) not null,
+business_name varchar(50) not null,
+business_company varchar(100) not null,
+business_hp varchar(50) not null,
+business_email varchar(100) not null)</queryString>
+				</query>
+			</queryList>
+		</bookmark>
+		<bookmark>
+			<name>finalProject</name>
+			<username>Sist0615_1st</username>
+			<password>Tkddyd1109!#</password>
+			<prompt>false</prompt>
+			<connect>jdbc:mysql://finalproject-sist0615.crsfihj2wlpy.ap-northeast-2.rds.amazonaws.com/finalproject</connect>
+			<autoCommit>true</autoCommit>
+			<autoCommitPreference>Always True</autoCommitPreference>
+			<autoCommitIgnoreView>false</autoCommitIgnoreView>
+			<quoteAll>false</quoteAll>
+			<sendQueryAsIs>false</sendQueryAsIs>
+			<stripNewline>false</stripNewline>
+			<shutdownOnDisconnect>false</shutdownOnDisconnect>
+			<defaultEncoding />
+			<driver>com.mysql.cj.jdbc.Driver</driver>
+			<type>MYSQL</type>
+			<substituteVariables>false</substituteVariables>
+			<variablesRegexp>\$\{(.*?)\}</variablesRegexp>
+			<driverLocation>C:\sist0615\util\mysql-connector-j-8.1.0.jar</driverLocation>
+			<Other_Schemas schemaRule="useAll" />
+			<quickList />
+			<queryList>
+				<query>
+					<queryString>insert into info values(&quot;sgyeong&quot;, &quot;성경&quot;, &quot;sg&quot;, 1234, &quot;010-1111-2222&quot;, &quot;sg@gmail.com&quot;, &quot;1997-08-23&quot;, now())</queryString>
+				</query>
+				<query>
+					<queryString>create table businessman (business_id varchar(20) primary key not null, 
+business_pass varchar(50) not null, 
+business_name varchar(50) not null,
+business_company varchar(100) not null,
+business_hp varchar(50) not null,
+business_email varchar(100) not null)</queryString>
+				</query>
+				<query>
+					<queryString>select * from info where info_id='sgyeong'</queryString>
+				</query>
+				<query>
+					<queryString>rollback</queryString>
+				</query>
+			</queryList>
+		</bookmark>
+	</bookmarks>
+</SAVED_DATA>

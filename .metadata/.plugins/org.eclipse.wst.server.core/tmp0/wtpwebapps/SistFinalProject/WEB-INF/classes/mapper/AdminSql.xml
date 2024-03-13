@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sist.last.mapper.AdminMapperInter">
+  	<select id="adminloginPassCheck" parameterType="Map" resultType="int"> <!-- mybatis룰에 따라서 parameterType에 1가지만 쓰기때문 -->
+		select count(*) from admin where admin_id=#{admin_id} and admin_pass=#{admin_pass} 
+	</select>
+	
+	<update id="adminApprovalOfAccom" parameterType="int">
+		update accom set accom_approval=1 where accom_num=#{accom_num}
+	</update>
+	
+	<select id="getAccomPagingList" parameterType="Map" resultType="AccomDto">
+		select * from accom where accom_approval=0 order by accom_num asc limit #{start},#{perpage}
+	</select>
+	
+	<select id="getAccomTotalCount" resultType="int">
+		select count(*) from accom where accom_approval=0
+	</select>
+	
+	<select id="getPaymentPagingList" parameterType="Map" resultType="reserveDto">
+		select * from reservation order by idx asc limit #{start},#{perpage}
+	</select>
+	
+	<select id="getPaymentTotalCount" resultType="int">
+		select count(*) from reservation
+	</select>
+	
+	<select id="getBusinessPagingList" parameterType="Map" resultType="business">
+		select * from businessman where business_approval=0 order by idx limit #{start},#{perpage}
+	</select>
+	
+	<select id="getBusinessTotalCount" resultType="int">
+		select count(*) from businessman where business_approval=0
+	</select>
+	
+	<select id="getMemberPagingList" parameterType="Map" resultType="member">
+		select * from info limit #{start},#{perpage}
+	</select>
+	
+	<select id="getMemberTotalCount" resultType="int">
+		select count(*) from info
+	</select>
+	
+	<update id="adminApprovalOfBussiness" parameterType="String">
+		update businessman set business_approval=1 where business_id=#{business_id}
+	</update>
+	
+	<select id="getBusinessId" parameterType="int" resultType="business">
+		select * from businessman where idx=#{idx}
+	</select>
+</mapper>

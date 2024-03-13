@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sist.last.mapper.NonBookableMapperInter">
+    <select id="getAccomName" resultType="String" parameterType="String">
+        select accom_name from accom where business_id = #{business_id}
+    </select>
+    <select id="getAccomNumber" resultType="int" parameterType="String">
+        select accom_num from accom where accom_name = #{accom_name}
+    </select>
+    <select id="getNonBookableList" resultType="nonBookableDto" parameterType="String">
+        select * from nonbookable where accom_name = #{accom_name}
+    </select>
+    <insert id="addNonBookableDate" parameterType="nonBookableDto">
+        insert into nonbookable (accom_num,non_checkin,non_checkout,accom_name)
+        values (#{accom_num},#{non_checkin},#{non_checkout},#{accom_name})
+    </insert>
+    <select id="getNonBookableCheckin" resultType="String" parameterType="int">
+        select non_checkin from nonbookable where accom_num = #{accom_num}
+    </select>
+    <select id="getNonBookableCheckout" resultType="String" parameterType="int">
+        select non_checkout from nonbookable where accom_num = #{accom_num}
+    </select>
+    <delete id="deleteNonBookableDate" parameterType="String">
+        delete from nonbookable where idx=#{idx}
+    </delete>
+    <delete id="deleteNonBookableDateOfAccomName" parameterType="String">
+        delete from nonbookable where accom_name = #{accom_name}
+    </delete>
+</mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sist.last.mapper.ProductMapperInter">
+    <select id="selectCategory" resultType="String">
+        select distinct accom_category from accom order by accom_category asc
+    </select>
+    <select id="getProductDataByCategory" resultType="productDto" parameterType="String">
+        select * from accom where accom_category='${category}'
+    </select>
+</mapper>

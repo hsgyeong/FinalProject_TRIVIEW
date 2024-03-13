@@ -1,0 +1,88 @@
+.emoji_pickup{
+  cursor: pointer;
+  margin-left: 20px;
+  width: 28px;
+}
+
+#emoji_pickup_before{
+  margin-right: 10px
+}
+
+#emoji_pickup_after{
+  margin-right: 10px;
+  display: none;
+}
+
+#emoji_popup{
+  margin-top: 50px;
+  display: none;
+  position: absolute;
+  border: 1px #CECEF6 solid;
+  width: 285px;
+  height: 150px;
+  overflow: auto;
+}
+
+#emoji_navigator{
+  border-bottom: 1px #CECEF6 solid;
+}
+
+#emoji_tooltip{
+  display: none;
+  border: 1px #CECEF6 solid;
+}
+
+.navigator{
+  border: 1px #FFFFFF solid;
+  cursor: pointer;
+  margin: 1px;
+  width: 32px;
+  height: 32px
+}
+
+.navigator:hover{
+  border: 1px #CECEF6 solid;
+  cursor: pointer;
+  margin: 1px;
+  width: 32px;
+  height: 32px
+}
+
+.emoji_list{
+  border: 1px #FFFFFF solid;
+  cursor: pointer;
+  margin: 1px;
+  width: 32px;
+  height: 32px;
+  font-size: 20pt;
+}
+
+.emoji_list:hover{
+  border: 1px #CECEF6 solid;
+  cursor: pointer;
+  margin: 1px;
+  width: 32px;
+  height: 32px
+}
+
+/* Scroll Bar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

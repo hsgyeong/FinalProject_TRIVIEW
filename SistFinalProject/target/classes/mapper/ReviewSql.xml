@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sist.last.mapper.ReviewMapperInter">
+
+    <insert id="insertReview" parameterType="ReviewDto">
+	    insert into review (info_id, review_info, review_score, accom_num, review_write) values (#{info_id}, #{review_info}, #{review_score}, #{accom_num}, now())
+	</insert>
+	
+	<select id="ReviewList" parameterType="int" resultType="ReviewDto">
+		select * from review where accom_num=#{accom_num} order by review_num desc
+	</select>
+	
+	<select id="ReviewTotalCount" parameterType="int" resultType="int">
+		select count(*) from review where accom_num=#{accom_num}
+	</select>
+	
+	<select id="getList" parameterType="HashMap" resultType="ReviewDto">
+    	select * from review where accom_num=#{accom_num} order by accom_num desc limit #{start}, #{perpage}
+	</select>
+	
+	<select id="InfoIdTotalCount" resultType="int" parameterType="map">
+    SELECT COUNT(*) AS review_count FROM review
+    WHERE info_id = #{info_id}
+    <if test="accom_num != null">
+        AND accom_num = #{accom_num}
+    </if>
+</select>
+	
+</mapper>

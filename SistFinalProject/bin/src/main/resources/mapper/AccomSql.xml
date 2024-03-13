@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sist.last.mapper.AccomMapperInter">
+
+    <insert id="insertAccom" parameterType="AccomDto">
+        insert into accom(
+        business_id, accom_name, accom_category,
+        accom_photo, accom_location, accom_address,
+        accom_hashtag, accom_latitude, accom_longitude
+    ) values (
+        #{business_id}, #{accom_name}, #{accom_category},
+        #{accom_photo}, #{accom_location}, #{accom_address},
+        #{accom_hashtag}, #{accom_latitude}, #{accom_longitude}
+    )
+    </insert>
+
+    <select id="getAllData" resultType="AccomDto">
+        select * from accom where business_id=#{business_id}
+    </select>
+
+    <select id="getTotalCount" resultType="int">
+        select count(*) from accom where business_id=#{business_id}
+    </select>
+
+    <delete id="deleteAccom" parameterType="int">
+        delete from accom where accom_num=#{accom_num}
+    </delete>
+
+    <select id="getOneData" parameterType="int" resultType="AccomDto">
+        select * from accom where accom_num=#{accom_num}
+    </select>
+
+    <update id="updateAccom" parameterType="AccomDto">
+        update accom set
+        accom_name=#{accom_name},accom_category=#{accom_category},accom_photo=#{accom_photo},accom_location=#{accom_location},accom_address=#{accom_address},accom_hashtag=#{accom_hashtag}
+        where accom_num=#{accom_num}
+    </update>
+</mapper>

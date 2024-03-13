@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="sist.last.mapper.ReserveMapperInter">
+ 	<insert id="reservingInsert" parameterType="reserveDto">
+ 		insert into reservation values (null,#{reserve_id},#{info_id},#{reserve_name},#{reserve_hp},#{room_num},#{accom_num},#{accom_name},#{room_name},#{reserve_amount},#{reserve_checkin},#{reserve_checkout},"예약완료",#{reserve_coupon},now());
+ 	</insert>
+ 	
+ 	<select id="getOneDataByIdOfReserve" parameterType="Map" resultType="reserveDto">
+ 		select * from reservation where info_id=#{info_id} and idx=#{idx}
+ 	</select>
+ 	
+ 	<select id="getMaxIdxOfReserve" resultType="int">
+ 		select max(idx) from reservation
+ 	</select>
+ 	
+ 	<select id="getOneInfoData" parameterType="Map" resultType="reserveDto">
+	    SELECT * FROM reservation WHERE info_id = #{info_id} AND accom_num = #{accom_num};
+	</select>
+ 	
+ 	<select id="getReservationDataById" parameterType="String" resultType="reserveDto">
+ 		select * from reservation where info_id=#{info_id}
+ 	</select>
+ 	
+ 	<select id="getReserveCountOfRoomNumber" parameterType="int" resultType="reserveDto">
+        select room_num,reserve_checkin,reserve_checkout from reservation where room_num=#{room_num}
+    </select>
+    
+    <update id="updateReserveStatus" parameterType="reserveDto">
+    	update reservation set reserve_status=#{reserve_status} where reserve_id=#{reserve_id}
+    </update>
+    
+    <select id="getPhoto" parameterType="String" resultType="String">
+    	select room_photo from room where room_num = #{room_num}
+    </select>
+
+ </mapper>

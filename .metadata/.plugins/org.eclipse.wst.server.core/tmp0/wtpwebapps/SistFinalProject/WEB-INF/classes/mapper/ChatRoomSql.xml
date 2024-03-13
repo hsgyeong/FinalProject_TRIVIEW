@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sist.last.mapper.ChatRoomMapperInter">
+    <select id="getMaxNum">
+        select max(room_num) from chatroom
+    </select>
+    <insert id="insertChatRoom" parameterType="String">
+        insert into chatroom values(null,#{senderid},'admin',now())
+    </insert>
+<!-- table에 내가 진행했던 채팅방이 있는지 확인 -->
+    <select id="getSenderId" parameterType="String" resultType="String">
+        select * from chatroom where senderid=#{senderid}
+    </select>
+    <select id="selectChatRoom" resultType="chatRoomDto">
+        select * from chatroom order by roomnumber desc
+    </select>
+    <select id="getChatRoom" resultType="chatRoomDto" parameterType="int">
+        select * from chatroom where room_num=#{room_num}
+    </select>
+
+    <select id="checkChatRoom" parameterType="Map" resultType="String">
+        select room_num from chatroom where accom_num=#{accom_num} and sender_id=#{sender_id}
+    </select>
+    <insert id="insertRoom" parameterType="chatRoomDto">
+        insert into chatroom values(null,#{accom_num},#{accom_name},#{sender_id},#{receiver_id},now())
+    </insert>
+    <select id="getChatRoomByUser" parameterType="String" resultType="chatRoomDto">
+        select * from chatroom where sender_id=#{sender_id}
+    </select>
+    <select id="getChatRoomByAccom" parameterType="int" resultType="chatRoomDto">
+        select * from chatroom where accom_num=#{accom_num} order by room_num desc
+    </select>
+    <select id="getChatRoomByAccomAndSender" parameterType="Map" resultType="int">
+        select room_num from chatroom where accom_num=#{accom_num} and sender_id=#{sender_id}
+    </select>
+    <select id="getChatRoomListByReceiverId" parameterType="String" resultType="chatRoomDto">
+        select * from chatroom where receiver_id=#{receiver_id}
+    </select>
+    <select id="getChatRoomNameByAccomAndSender" parameterType="Map" resultType="String">
+        select room_name from chatroom where accom_num=#{accom_num} and sender_id=#{sender_id}
+    </select>
+
+
+</mapper>

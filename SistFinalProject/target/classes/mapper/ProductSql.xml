@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sist.last.mapper.ProductMapperInter">
+    <select id="selectCategory" resultType="String">
+        select distinct accom_category from accom order by accom_category asc
+    </select>
+    <select id="getProductDataOfCategory" resultType="productDto" parameterType="String">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_category = #{keyword}
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(A.accom_score) desc, MIN(B.room_price) asc
+    </select>
+    <select id="getProductDataOfHashTag" resultType="productDto" parameterType="String">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_hashtag like '%${keyword}%'
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(A.accom_score) desc, MIN(B.room_price) asc
+    </select>
+    <select id="getProductDataOfLocation" resultType="productDto" parameterType="String">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_location like '%${keyword}%'
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(A.accom_score) desc, MIN(B.room_price) asc
+    </select>
+    <select id="getProductDataOfName" resultType="productDto" parameterType="String">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_name like '%${keyword}%'
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(A.accom_score) desc, MIN(B.room_price) asc
+    </select>
+    <select id="getProductOfCategoryByLowPrice" resultType="productDto" parameterType="String">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_category = #{keyword}
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(B.room_price) asc, MIN(A.accom_score) desc
+    </select>
+    <select id="getProductOfHashTagByLowPrice" resultType="productDto" parameterType="String">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_hashtag like '%${keyword}%'
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(B.room_price) asc, MIN(A.accom_score) desc
+    </select>
+    <select id="getProductOfLocationByLowPrice" resultType="productDto" parameterType="String">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_location like '%${keyword}%'
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(B.room_price) asc, MIN(A.accom_score) desc
+    </select>
+    <select id="getProductOfNameByLowPrice" resultType="productDto" parameterType="String">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_name like '%${keyword}%'
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(B.room_price) asc, MIN(A.accom_score) desc
+    </select>
+    <select id="getProductClickOrderByLowPriceOfCategory" resultType="productDto" parameterType="Map">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_category = #{keyword} and
+        B.room_price between #{minPrice} and #{maxPrice}
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(B.room_price) asc, MIN(A.accom_score) desc
+    </select>
+    <select id="getProductClickOrderByLowPriceOfHashTag" resultType="productDto" parameterType="Map">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_hashtag like '%${keyword}%' and
+        B.room_price between #{minPrice} and #{maxPrice}
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(B.room_price) asc, MIN(A.accom_score) desc
+    </select>
+    <select id="getProductClickOrderByLowPriceOfLocation" resultType="productDto" parameterType="Map">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_location like '%${keyword}%' and
+        B.room_price between #{minPrice} and #{maxPrice}
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(B.room_price) asc, MIN(A.accom_score) desc
+    </select>
+    <select id="getPriceOfAccomNumber" resultType="int" parameterType="int">
+        select B.room_price from accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_num = #{accom_num}
+    </select>
+    <select id="getPriceOfRoomNumber" resultType="int" parameterType="int">
+        select B.room_price from accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_num = #{accom_num}
+    </select>
+    <select id="getProductOfLowPrice" resultType="int" parameterType="int">
+        select B.room_price from accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_num = #{accom_num}
+        order by B.room_price asc limit 1
+    </select>
+    <select id="getProductClickOrderByLowPriceOfName" resultType="productDto" parameterType="Map">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        where A.accom_name like '%${keyword}%' and
+        B.room_price between #{minPrice} and #{maxPrice}
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(B.room_price) asc, MIN(A.accom_score) desc
+    </select>
+    <select id="getAllProduct" resultType="productDto">
+        select A.accom_num, A.accom_name, A.accom_category, A.accom_location, A.accom_hashtag,
+        MIN(A.accom_score) AS accom_score, A.accom_latitude, A.accom_longitude, A.accom_photo,
+        A.accom_count, MIN(B.room_price) AS room_price
+        FROM accom A JOIN room B ON A.accom_num = B.accom_num
+        GROUP BY A.accom_num, A.accom_name, A.accom_category,
+        A.accom_location, A.accom_hashtag, A.accom_latitude,
+        A.accom_longitude, A.accom_photo, A.accom_count
+        order by MIN(B.room_price) asc, MIN(A.accom_score) desc
+    </select>
+</mapper>

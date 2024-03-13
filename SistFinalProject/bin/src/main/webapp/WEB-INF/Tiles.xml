@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="layout1" template="/WEB-INF/layout/layout1.jsp"> <!-- layout1이라는 큰 틀 안에 put-attribut가 배치된다라고 생각 -->
+		<put-attribute name="title" value="/WEB-INF/layout/title.jsp"/>
+		<put-attribute name="main" value="/WEB-INF/layout/main.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
+	</definition>
+
+	<!-- wild card 형식으로 만들기 -->
+	<definition name="/*/*" extends="layout1">
+		<put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
+	</definition>
+
+</tiles-definitions>

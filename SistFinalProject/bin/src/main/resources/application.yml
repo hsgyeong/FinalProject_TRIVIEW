@@ -1,0 +1,33 @@
+#yml버전 자동 들여쓰기 적용
+#tomcat port
+server:
+  port: 9000
+#jsp - yml에서는 앞에가 같으면 띄어서 적어짐
+
+
+
+
+spring:
+  #밑에 #한 3가지 설정해줬기 때문에 안씀
+  #mvc:
+    #view:
+      #prefix: /WEB-INF/ipgo/
+      #suffix: .jsp
+  devtools:
+    livereload:
+      enabled: true
+
+
+#mysql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://finalproject-sist0615.crsfihj2wlpy.ap-northeast-2.rds.amazonaws.com/finalproject
+    username: Sist0615_1st
+    password: Tkddyd1109!#
+    
+#mybatis setting
+mybatis:
+  type-aliases-package: sist.last.*
+  mapper-locations:
+  - /mapper/**/*.xml
+  
