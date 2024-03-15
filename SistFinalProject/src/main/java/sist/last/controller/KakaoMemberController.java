@@ -37,7 +37,7 @@ public class KakaoMemberController {
 	
 	 try {
 		 																
-	 String access_token = kakaoMemberService.getAccessToken(code);      	//kakaoMemberServiceInter.getAccessToken(code)를 호출하여 카카오로부터 받은 code를 사용해 접근 토큰을 얻음
+	 String access_token = kakaoMemberService.getAccessToken(code);     //kakaoMemberServiceInter.getAccessToken(code)를 호출하여 카카오로부터 받은 code를 사용해 접근 토큰을 얻음
 
 	 HashMap<String, Object> userInfo = kakaoMemberService.getUserInfo(access_token);      //kakaoMemberService.getuserInfo(access_token)을 호출하여 해당 토큰을 이용해 카카오 회원 정보를 얻기
 	 //System.out.println("userInfo==== "+userInfo); //userInfo==== {kakao_id=121201221, kakao_nickname=홍성경}
@@ -51,7 +51,7 @@ public class KakaoMemberController {
 	 map.put("count", k);		
 	 System.out.println(k);
 	 
-	 if(k==1) {      //이미 존재하는 사용자의 경우 사용자 정보를 세션에 저장하고 해당 아이디로 멤버 정보를 가져옴
+	 if(k==1) {    //이미 존재하는 사용자의 경우 사용자 정보를 세션에 저장하고 해당 아이디로 멤버 정보를 가져옴
 		
 		 session.setAttribute("info_nickname", info_nickname);
 		 session.setAttribute("info_id", "kakao_"+info_id);
