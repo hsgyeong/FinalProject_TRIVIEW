@@ -30,36 +30,29 @@ public class KakaoMemberController {
 	@Autowired
 	public MemberMapperInter memberMapperInter;
 
-				//kakaologin 메서드는 아래 경로로의 get요청을 처리
- @RequestMapping(value="/login/kakao-member", method =  RequestMethod.GET)
- public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session, MemberDto memberDto) throws Throwable {
-	 					//@Requestparam이라는 어노테이션을 사용하여 code라는 파라미터를 받는다. 이 파라미터는 선택적이며 요청시 제공되지 않을 수 있음
-	
+ @RequestMapping(value="/login/kakao-member", method =  RequestMethod.GET)  //kakaologin 메서드는 아래 경로로의 get요청을 처리
+ public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session, MemberDto memberDto) throws Throwable {  	//@Requestparam이라는 어노테이션을 사용하여 code라는 파라미터를 받는다. 이 파라미터는 선택적이며 요청시 제공되지 않을 수 있음
+	 				
 	 System.out.println("code: "+code);
 	
 	 try {
-	 //kakaoMemberServiceInter.getAccessToken(code)를 호출하여 카카오로부터 받은 code를 사용해 접근 토큰을 얻음
-	 String access_token = kakaoMemberService.getAccessToken(code);
-	 System.out.println("accessToken: "+access_token);
-	 
-	 //kakaoMemberServiceInter.getuserInfo(access_token)을 호출하여 해당 토큰을 이용해 카카오 회원 정보를 얻기
-	 HashMap<String, Object> userInfo = kakaoMemberService.getUserInfo(access_token);
-	 System.out.println("userInfo==== "+userInfo); //userInfo==== {kakao_id=121201221, kakao_nickname=홍성경}
+		 																
+	 String access_token = kakaoMemberService.getAccessToken(code);      	//kakaoMemberServiceInter.getAccessToken(code)를 호출하여 카카오로부터 받은 code를 사용해 접근 토큰을 얻음
+
+	 HashMap<String, Object> userInfo = kakaoMemberService.getUserInfo(access_token);      //kakaoMemberService.getuserInfo(access_token)을 호출하여 해당 토큰을 이용해 카카오 회원 정보를 얻기
+	 //System.out.println("userInfo==== "+userInfo); //userInfo==== {kakao_id=121201221, kakao_nickname=홍성경}
 	 
 	 String info_nickname = (String)userInfo.get("kakao_nickname");
-	 System.out.println(info_nickname);  //닉네임: 홍성경
 	 String info_id = (String) userInfo.get("kakao_id");
-	 System.out.println("kakaoid : "+info_id);
 	 
 	 Map<String, Integer> map = new HashMap<>();
 	
 	 int k = kakaoMemberService.getSearchKakaoId("kakao_"+info_id);
-	 map.put("count", k);
+	 map.put("count", k);		
 	 System.out.println(k);
 	 
-	 if(k==1) {
-		 System.out.println("별명:"+info_nickname);
-		 System.out.println("kakaoid == "+info_id);
+	 if(k==1) {      //이미 존재하는 사용자의 경우 사용자 정보를 세션에 저장하고 해당 아이디로 멤버 정보를 가져옴
+		
 		 session.setAttribute("info_nickname", info_nickname);
 		 session.setAttribute("info_id", "kakao_"+info_id);
 		 session.setAttribute("access_token", access_token);
@@ -67,8 +60,6 @@ public class KakaoMemberController {
 		 
 		 String loggedKakaoId = (String) session.getAttribute("info_id");
 		 MemberDto loggedInMember = memberMapperInter.getDataByKakaoId(loggedKakaoId);
-		 System.out.println(loggedKakaoId);
-		 System.out.println(loggedInMember);
 	
 	 }else if(k==0)
 	 {   System.out.print("kakaoid ==== "+info_id);
