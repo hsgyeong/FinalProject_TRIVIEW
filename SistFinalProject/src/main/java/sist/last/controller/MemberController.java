@@ -34,21 +34,18 @@ public class MemberController {
 	ReserveMapperInter mapper;
 	
 	@GetMapping("/member/joinform")
-	public String addform()
-	{
+	public String addform() {
 		return "/member/addFormMain";
 	}
 	
 	@GetMapping("/member/member-join")
-	public String addperson()
-	{
+	public String addperson(){
 		return "/member/memberAddForm";
 	}
 	
 	@GetMapping("/member/idcheck")
 	@ResponseBody
-	public Map<String, Integer> idCheck(@RequestParam String info_id)
-	{
+	public Map<String, Integer> idCheck(@RequestParam String info_id) {
 		Map<String, Integer> map = new HashMap<>();
 		
 		int i = service.getSearchId(info_id);
@@ -60,8 +57,7 @@ public class MemberController {
 	
 	@GetMapping("/member/nickcheck")
 	@ResponseBody
-	public Map<String, Integer> nickCheck(@RequestParam String info_nickname)
-	{
+	public Map<String, Integer> nickCheck(@RequestParam String info_nickname) {
 		Map<String, Integer> map = new HashMap<>();
 		
 		int a = service.getSearchNick(info_nickname);
@@ -74,33 +70,31 @@ public class MemberController {
 	
 	@PostMapping("/member/join-member")
 	public String insert(MemberDto memberDto,
-			@RequestParam String hp1,
-			@RequestParam String hp2,
-			@RequestParam String hp3,
-			@RequestParam String email1,
-			@RequestParam String email2,
-			HttpSession session)
-	{
+						 @RequestParam String hp1,
+						 @RequestParam String hp2,
+						 @RequestParam String hp3,
+						 @RequestParam String email1,
+						 @RequestParam String email2,
+						 HttpSession session) {
+		
 			String hp = hp1+"-"+hp2+"-"+hp3;
 			memberDto.setInfo_hp(hp);
 			
 			String email = email1+"@"+email2;
 			memberDto.setInfo_email(email);	
 		
-		service.insertMember(memberDto);	
+			service.insertMember(memberDto);	
 
-		return "/member/welcome";
+			return "/member/welcome";
 	}
 	
 	@GetMapping("/member/member-mytriview")
-	public String mytriview(Model model, HttpSession session)
-	{
+	public String mytriview(Model model, HttpSession session) {
 		String info_id = (String)session.getAttribute("info_id");
 		
 		MemberDto memberDto = service.getDataById(info_id);
 		
 		session.setAttribute("info_id", memberDto.getInfo_id());
-		
 		model.addAttribute("memberDto", memberDto);
 		
 		return "/member/memberMyTriview";
@@ -108,8 +102,7 @@ public class MemberController {
 	
 	@GetMapping("/member/member-mypage")
 	public String mypage(Model model,
-			HttpSession session)
-	{
+						 HttpSession session) {
 		
 		String info_id = (String)session.getAttribute("info_id");
 		//System.out.println(myid);
@@ -119,15 +112,13 @@ public class MemberController {
 		model.addAttribute("memberDto", memberDto);
 		
 		//System.out.println(memberDto.getId());
-	
 		//System.out.println(memberDto.getInfo_id());
 		
 		return "/member/memberMyPage";
 	}
 	
 	@GetMapping("/member/member-update")
-	public String updateform(@RequestParam String info_id, Model model)
-	{	
+	public String updateform(@RequestParam String info_id, Model model)	{	
 		MemberDto memberDto = service.getDataById(info_id);
 		
 		model.addAttribute("memberDto", memberDto);
@@ -137,13 +128,12 @@ public class MemberController {
 	
 	@PostMapping("/member/update-member")
 	public String update(@ModelAttribute MemberDto dto,
-			@RequestParam String hp1,
-			@RequestParam String hp2,
-			@RequestParam String hp3,
-			@RequestParam String email1,
-			@RequestParam String email2,
-			HttpSession session)
-	{
+						 @RequestParam String hp1,
+						 @RequestParam String hp2,
+						 @RequestParam String hp3,
+						 @RequestParam String email1,
+						 @RequestParam String email2,
+						 HttpSession session) {
 		String hp = hp1+"-"+hp2+"-"+hp3;
 		dto.setInfo_hp(hp);
 		
@@ -155,45 +145,36 @@ public class MemberController {
 		return "/member/updateSuccess";
 	}
 	
-	
-	
 	@GetMapping("/member/delete-member")
 	@ResponseBody
 	public String delete(@RequestParam String info_id,
-			HttpServletRequest request)
-	{
+						 HttpServletRequest request) {
 		service.deleteMember(info_id);
 		return "/";
 	}
 	
 	@GetMapping("/member/mycoupon")
-	public String coupon()
-	{
-		
+	public String coupon() {
 		return "/member/myCoupon";
 	}
 	
 	@GetMapping("/member/mypoint")
-	public String point()
-	{
+	public String point() {
 		return "/member/myPoint";
 	}
 	
 	@GetMapping("/notice/event")
-	public String event()
-	{
+	public String event() {
 		return "/notice/event";
 	}
 	
 	@GetMapping("/triview/info")
-	public String info()
-	{
+	public String info() {
 		return "/notice/triviewInfo";
 	}
 	
 	@GetMapping("/member/myreservation")
-	public String myreservation(Model model, HttpSession session)
-	{	
+	public String myreservation(Model model, HttpSession session) {	
 		String info_id = (String)session.getAttribute("info_id");
 
 		//System.out.println(room_num);
@@ -214,7 +195,6 @@ public class MemberController {
 		}
 		//list만큼 for문 
 		
-	
 		model.addAttribute("list", list);
 		model.addAttribute("photoList", photoList);
 		
@@ -222,8 +202,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/member/update-reserve")
-	public String reserveUpdate(@ModelAttribute ReserveDto dto, Model model)
-	{
+	public String reserveUpdate(@ModelAttribute ReserveDto dto, Model model) {
 		mapper.updateReserveStatus(dto);
 		
 		model.addAttribute(dto);

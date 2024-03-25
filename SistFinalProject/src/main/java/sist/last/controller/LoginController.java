@@ -30,8 +30,7 @@ public class LoginController {
 
 
     @GetMapping("/login/loginmain")
-    public String loginform(HttpSession session,
-                            Model model) {
+    public String loginform(HttpSession session, Model model) {
 
         String loginok = (String) session.getAttribute("loginok");
 
@@ -66,7 +65,6 @@ public class LoginController {
     @GetMapping("/login/fail")
     public String loginfail() {
         return "/member/loginFail";
-
     }
 
     @PostMapping("/login/member-login")
@@ -75,7 +73,8 @@ public class LoginController {
                         @RequestParam(required = false) String cbsave,
                         HttpSession session,
                         HttpServletResponse response) {
-        HashMap<String, String> map = new HashMap<>();
+      
+    	HashMap<String, String> map = new HashMap<>();
         int check = service.loginPassCheck(info_id, info_pass);
 
         if (check == 1) {
@@ -93,7 +92,6 @@ public class LoginController {
 
             return "redirect:/";
         } else {
-
             return "/login/loginFail";
         }
 
@@ -115,7 +113,6 @@ public class LoginController {
             if(approval == 1) {
             	
                 session.setMaxInactiveInterval(60 * 60 * 8);
-
                 session.setAttribute("business_id", business_id);
                 session.setAttribute("businessSave", business_id);
                 session.setAttribute("loginok", "business");
@@ -126,20 +123,18 @@ public class LoginController {
         		session.setAttribute("business_company", businessDto.getBusiness_company());
     			
             	return "redirect:/";
-            }
-            else {
+            } else {
             	return "/company/approvalFail";
             }
         } 
 
             return "/login/loginFail";
-        }
+    }
 
     
 
     @GetMapping("/login/login-fail")
     public String loginFail() {
-
         return "/login/loginFail";
     }
 
@@ -150,10 +145,10 @@ public class LoginController {
 
         if (loginok != null) {
 
-        session.removeAttribute("loginok");
-        session.removeAttribute("info_id");
-        session.removeAttribute("business_id");
-        session.removeAttribute("kakao_nickname");
+        	session.removeAttribute("loginok");
+        	session.removeAttribute("info_id");
+        	session.removeAttribute("business_id");
+        	session.removeAttribute("kakao_nickname");
     
         }
         return "redirect:/";

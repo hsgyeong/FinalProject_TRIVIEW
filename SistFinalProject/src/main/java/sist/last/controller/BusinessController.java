@@ -27,15 +27,14 @@ public class BusinessController {
 	BusinessService businessService;
 	
 	@GetMapping("/member/business-join")
-	public String addbusiness()
-	{
+	public String addbusiness() {
 		return "/company/businessAddForm";
 	}
 	
 	@GetMapping("/member/business-idcheck")
 	@ResponseBody
-	public Map<String, Integer> idCheck(@RequestParam String business_id)
-	{
+	public Map<String, Integer> idCheck(@RequestParam String business_id) {
+		
 		Map<String, Integer> map = new HashMap<>();
 		
 		int a = businessService.getSearchBusinessId(business_id);
@@ -47,13 +46,12 @@ public class BusinessController {
 	
 	@PostMapping("/member/join-business")
 	public String insert(@ModelAttribute BusinessDto businessDto,
-			@RequestParam String hp1,
-			@RequestParam String hp2,
-			@RequestParam String hp3,
-			@RequestParam String email1,
-			@RequestParam String email2,
-			HttpSession session)
-	{
+						 @RequestParam String hp1,
+						 @RequestParam String hp2,
+						 @RequestParam String hp3,
+						 @RequestParam String email1,
+						 @RequestParam String email2,
+						 HttpSession session) {
 		String hp = hp1+"-"+hp2+"-"+hp3;
 		businessDto.setBusiness_hp(hp);
 		
@@ -66,23 +64,19 @@ public class BusinessController {
 	}
 	
 	@GetMapping("/business/business-mytriview")
-	public String mytriview(Model model, HttpSession session)
-	{
+	public String mytriview(Model model, HttpSession session) {
 		String business_id = (String) session.getAttribute("business_id");
 		
 		BusinessDto businessDto = businessService.getDataByBusinessId(business_id);
 		
 		session.setAttribute("business_company", businessDto.getBusiness_company());
-		
 		model.addAttribute("businessDto", businessDto);
 		
 		return "/company/businessMyTriview";
 	}
 	
 	@GetMapping("/business/business-mypage")
-	public String mypage(Model model,
-			HttpSession session)
-	{
+	public String mypage(Model model, HttpSession session) {
 	/*	List<MemberDto> list = service.getAllMembers();
 		
 		model.addAttribute("list", list);   */
@@ -93,16 +87,13 @@ public class BusinessController {
 		BusinessDto businessDto = businessService.getDataByBusinessId(business_id);
 		
 		model.addAttribute("businessDto", businessDto);
-		
 		//System.out.println(myid+businessDto);
-		
-		
+
 		return "/company/businessMyPage";
 	}
 
 	@GetMapping("/member/business-update")
-	public String updateform(@RequestParam String business_id, Model model)
-	{	
+	public String updateform(@RequestParam String business_id, Model model)	{	
 		BusinessDto businessDto = businessService.getDataByBusinessId(business_id);
 		
 		model.addAttribute("businessDto", businessDto);
@@ -112,13 +103,12 @@ public class BusinessController {
 	
 	@PostMapping("/member/update-business")
 	public String update(@ModelAttribute BusinessDto businessDto,
-			@RequestParam String hp1,
-			@RequestParam String hp2,
-			@RequestParam String hp3,
-			@RequestParam String email1,
-			@RequestParam String email2,
-			HttpSession session)
-	{
+						 @RequestParam String hp1,
+						 @RequestParam String hp2,
+						 @RequestParam String hp3,
+						 @RequestParam String email1,
+						 @RequestParam String email2,
+						 HttpSession session) {
 		String hp = hp1+"-"+hp2+"-"+hp3;
 		businessDto.setBusiness_hp(hp);
 		
@@ -132,9 +122,7 @@ public class BusinessController {
 
 	@GetMapping("/company/delete-business")
 	@ResponseBody
-	public String delete(@RequestParam String business_id,
-			HttpServletRequest request)
-	{
+	public String delete(@RequestParam String business_id, HttpServletRequest request)	{
 		businessService.deleteBusiness(business_id);
 		return "/";
 	}

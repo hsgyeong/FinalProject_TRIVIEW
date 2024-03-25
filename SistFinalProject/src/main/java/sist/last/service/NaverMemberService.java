@@ -70,19 +70,21 @@ public class NaverMemberService implements NaverMemberServiceInter {
 
 	@Override
 	public JsonNode getNaverUserInfo(String authorization_code, String state) {	 //네이버 사용자 정보를 가져옴. 매개변수로 인증코드와 상태를 전달받으며, 메서드의 반환값은 JSONNode객체이다. 
-	final String reqUrl = "https://openapi.naver.com/v1/nid/me";  //네이버 OpenApi의 사용자 정보를 가져오는 엔드포인트 url을 정의함
+	
+		final String reqUrl = "https://openapi.naver.com/v1/nid/me";  //네이버 OpenApi의 사용자 정보를 가져오는 엔드포인트 url을 정의함
 		
 		final HttpClient client = HttpClientBuilder.create().build();  //Apache HTTPClient를 사용하여 HTTP 요청을 보낼 클라이언트 객체를 생성함
 		final HttpPost post = new HttpPost(reqUrl);   //HTTPPost 요청을 생성하고 위에서 정의한 엔드포인트 url을 사용하여 초기화함
 		String accessToken = getAccessToken(authorization_code, state);  //getAccessToken 메서드를 호출하여 네이버에서 액세스토큰을 받아옴
 		
-		System.out.println("이것은 accessToken!!!!  "+accessToken);
+		//System.out.println(accessToken);
 		
 		post.addHeader("Authorization", "Bearer "+accessToken);   //HTTP 요청 헤더에 액세스 토큰을 추가함. 이를 통해 네이버에 인증된 사용자임을 서버에 알림.
 		
 		JsonNode returnNode = null;
 		
 		HttpResponse response;
+		
 		try {
 			response = client.execute(post);  //클라이언트를 사용하여 HTTP POST 요청을 실행하고 서버로부터 응답을 받음.
 			final int responseCode = response.getStatusLine().getStatusCode();   //HTTP 응답 코드를 가져옴

@@ -47,49 +47,50 @@ public class KakaoMemberService implements KakaoMemberServiceInter {
 		String refresh_token = "";
 		String reqURL = "https://kauth.kakao.com/oauth/token";   //카카오 OAuth 토큰 발급 URL 설정
 		
-	try {	
+		try {	
 		
-		URL url = new URL(reqURL);	//요청할 URL을 생성하고 HTTP 연결 설정
+			URL url = new URL(reqURL);	//요청할 URL을 생성하고 HTTP 연결 설정
 		
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		
-		conn.setRequestMethod("POST");	//POST 요청을 설정하고 출력 스트림을 사용할 것임을 설정
-		conn.setDoOutput(true);
+			conn.setRequestMethod("POST");	//POST 요청을 설정하고 출력 스트림을 사용할 것임을 설정
+			conn.setDoOutput(true);
 		
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));    //출력 스트림을 생성하고 StringBuilder를 사용하여 요청할 매개변수 저장할 준비
-		StringBuilder sb = new StringBuilder();  //요청할 매개변수들을 StringBuilder에 추가함
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));    //출력 스트림을 생성하고 StringBuilder를 사용하여 요청할 매개변수 저장할 준비
+			StringBuilder sb = new StringBuilder();  //요청할 매개변수들을 StringBuilder에 추가함
 		
-		sb.append("grant_type=authorization_code");		
-		sb.append("&client_id=f74ba8d7ae81ba39d038f11c32d7c6ae");
-		sb.append("&redirect_uri=http://localhost:9000/login/kakao-member");
-		sb.append("&code="+authorization_code);
+			sb.append("grant_type=authorization_code");		
+			sb.append("&client_id=f74ba8d7ae81ba39d038f11c32d7c6ae");
+			sb.append("&redirect_uri=http://localhost:9000/login/kakao-member");
+			sb.append("&code="+authorization_code);
 		
-		bw.write(sb.toString());	//BufferedWriter를 이용하여 요청할 매개변수들을 서버로 전송함
-		bw.flush();
+			bw.write(sb.toString());	//BufferedWriter를 이용하여 요청할 매개변수들을 서버로 전송함
+			bw.flush();
 		
-		int responseCode = conn.getResponseCode();   //서버로부터 응답코드 확인
-		//System.out.println("responseCode: "+responseCode);
+			int responseCode = conn.getResponseCode();   //서버로부터 응답코드 확인
+			//System.out.println("responseCode: "+responseCode);
 		
-		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));   //입력 스트림을 이용하여 서버로부터 응답을 읽어올 BufferedReader를 생성
-		String line = "";					
-		String result = "";
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));   //입력 스트림을 이용하여 서버로부터 응답을 읽어올 BufferedReader를 생성
+			String line = "";					
+			String result = "";
 		
-		while((line=br.readLine())!=null) {
-			result += line;
-		}
+			while((line=br.readLine())!=null) {
+				result += line;
+			}
 	
-		ObjectMapper objectMapper = new ObjectMapper();	//ObjectMapper를 사용하여 JSON 형식의 응답을 맵 형식으로 변환
+			ObjectMapper objectMapper = new ObjectMapper();	//ObjectMapper를 사용하여 JSON 형식의 응답을 맵 형식으로 변환
 		
-		Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>(){
-		});
-		access_token = jsonMap.get("access_token").toString();	//맵에서 액세스 토큰과 리프레시 토큰 추출
-		refresh_token = jsonMap.get("refresh_token").toString();
+			Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>(){
+			});
+			access_token = jsonMap.get("access_token").toString();	//맵에서 액세스 토큰과 리프레시 토큰 추출
+			refresh_token = jsonMap.get("refresh_token").toString();
 		
-		br.close();	
-		bw.close();
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+			br.close();	
+			bw.close();
+			
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
 
 		return access_token;
 	}
@@ -104,55 +105,56 @@ public class KakaoMemberService implements KakaoMemberServiceInter {
 		
 		try {
 		
-		URL url = new URL (reqURL);	    //요청할 URL에 연결
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("POST");   //POST 방식으로 요청함
+			URL url = new URL (reqURL);	    //요청할 URL에 연결
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");   //POST 방식으로 요청함
 		
-		conn.setRequestProperty("Authorization", "Bearer "+access_token);  //HTTP 요청 헤더에 access token을 포함시켜 인증
+			conn.setRequestProperty("Authorization", "Bearer "+access_token);  //HTTP 요청 헤더에 access token을 포함시켜 인증
 		
-		int responseCode = conn.getResponseCode();				
-		//System.out.println("responseCode: "+responseCode);   
+			int responseCode = conn.getResponseCode();				
+			//System.out.println("responseCode: "+responseCode);   
 		
-		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));  //응답 데이터를 읽어오는 BufferedReader 생성
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));  //응답 데이터를 읽어오는 BufferedReader 생성
 		
-		String line = "";     
-		String result = "";
+			String line = "";     
+			String result = "";
 		
-		while((line = br.readLine())!=null) {
+			while((line = br.readLine())!=null) {
 			
-			result += line;	//응답 데이터를 한 줄씩 읽어와 result 변수에 추가함
-		}
+				result += line;	//응답 데이터를 한 줄씩 읽어와 result 변수에 추가함
+			}
 		
-		JsonParser parser = new JsonParser();  	//Gson을 사용하여 JSON 데이터 파싱
-		JsonElement element = parser.parse(result);
+			JsonParser parser = new JsonParser();  	//Gson을 사용하여 JSON 데이터 파싱
+			JsonElement element = parser.parse(result);
 		
-		String kakao_id = element.getAsJsonObject().get("id").getAsString();    //JSON에서 카카오 아이디 추출
+			String kakao_id = element.getAsJsonObject().get("id").getAsString();    //JSON에서 카카오 아이디 추출
 		
-		try {
+			try {
 			
-			MemberDto memberDto = new MemberDto();		
+				MemberDto memberDto = new MemberDto();		
 			
-			ObjectMapper objectMapper = new ObjectMapper();   //ObjectMapper를 사용하여 JSON 데이터를 Map 객체로 변환함
-			Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {   //사용자의 속성 정보 추출
-			});
+				ObjectMapper objectMapper = new ObjectMapper();   //ObjectMapper를 사용하여 JSON 데이터를 Map 객체로 변환함
+				Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {   //사용자의 속성 정보 추출
+				});
 			
-			Map<String, Object> properties = (Map<String, Object>)
-			jsonMap.get("properties");
-			System.out.println(jsonMap.get("properties"));
+				Map<String, Object> properties = (Map<String, Object>)
+						jsonMap.get("properties");
+				System.out.println(jsonMap.get("properties"));
 			
-			Map<String, Object> kakao_account = (Map<String, Object>)   //사용자의 카카오 계정 정보 추출
-			jsonMap.get("kakao_account");
+				Map<String, Object> kakao_account = (Map<String, Object>)   //사용자의 카카오 계정 정보 추출
+						jsonMap.get("kakao_account");
 			
-			String kakao_nickname = properties.get("nickname").toString();    //사용자의 닉네임 추출
+				String kakao_nickname = properties.get("nickname").toString();    //사용자의 닉네임 추출
 			
-			userInfo.put("kakao_nickname", kakao_nickname);    //사용자 정보를 userInfo HashMap에 저장함
-			userInfo.put("kakao_id", kakao_id);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}catch(IOException e) {
-		e.printStackTrace();
-	}
+				userInfo.put("kakao_nickname", kakao_nickname);    //사용자 정보를 userInfo HashMap에 저장함
+				userInfo.put("kakao_id", kakao_id);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
 		return userInfo;
 	}
 
@@ -162,22 +164,23 @@ public class KakaoMemberService implements KakaoMemberServiceInter {
 		String reqURL = "https://kapi.kakao.com/v1/user/logout";   //카카오 로그아웃을 요청할 URL 설정
 		
 		try {
-			URL url = new URL(reqURL);    //URL 객체를 생성하고 해당 URL에 연결
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();   
-			conn.setRequestMethod("POST");     //HTTP POST 요청을 생성함
-			conn.setRequestProperty("Authorization", "Bearer "+access_token);  //요청 헤더에 access token을 포함시켜 인증함
+				URL url = new URL(reqURL);    //URL 객체를 생성하고 해당 URL에 연결
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();   
+				conn.setRequestMethod("POST");     //HTTP POST 요청을 생성함
+				conn.setRequestProperty("Authorization", "Bearer "+access_token);  //요청 헤더에 access token을 포함시켜 인증함
 			
-			int responseCode = conn.getResponseCode();    
+				int responseCode = conn.getResponseCode();    
 		
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));    //서버로부터 응답을 읽어오는 BufferedReader 생성
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));    //서버로부터 응답을 읽어오는 BufferedReader 생성
 			
-			String result = "";  
-			String line = "";
+				String result = "";  
+				String line = "";
 			
-			while((line = br.readLine()) != null) {
-				result += line;   //응답 데이터를 읽어와 result 변수에 추가함
-			}
-			System.out.println(result);
+				while((line = br.readLine()) != null) {
+					result += line;   //응답 데이터를 읽어와 result 변수에 추가함
+				}
+				System.out.println(result);
+		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -205,7 +208,7 @@ public class KakaoMemberService implements KakaoMemberServiceInter {
 			returnNode = mapper.readTree(response.getEntity().getContent());
 			
 		}catch(UnsupportedEncodingException e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}catch(IOException e) {
 			e.printStackTrace();
 		}finally {
@@ -228,13 +231,13 @@ public class KakaoMemberService implements KakaoMemberServiceInter {
 				conn.setDoOutput(true);
 				
 				 
-			try(BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()))){
+			try(BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()))) {
 				StringBuilder sb = new StringBuilder();
 				sb.append("target_id_type=user_id");
 				sb.append("&target_id="+kakao_id);
 				bw.write(sb.toString());
 				bw.flush();
-				}
+			}
 			
 				int responseCode = conn.getResponseCode();
 				System.out.println("responseCode: "+responseCode);
@@ -269,14 +272,12 @@ public class KakaoMemberService implements KakaoMemberServiceInter {
 	@Override
 	public MemberDto getDataByKakao(String kakao_id) {
 		// TODO Auto-generated method stub
-		
 		return memberMapperInter.getDataByKakao(kakao_id);
 	}
 
 	@Override
 	public void insertKakaoMember(MemberDto memberDto) {
 		// TODO Auto-generated method stub
-		
 		memberMapperInter.insertKakaoMember(memberDto);
 	}
 
