@@ -182,7 +182,7 @@ public class MemberController {
 		
 		//list dto 에 넣어서 그걸 뽑는거. 그 안에 필요한 거 예약번호, 숙소 이름, 방이름 가져오기, 체크인, 체크아웃 
 
-		List<ReserveDto> list = mapper.getReservationDataById(info_id);   
+		List<ReserveDto> list = mapper.getReservationDataById(info_id);  //리스트에서 0번쨰에 있는 데이터 나옴 그중에 room_num 존재 그 roomㅜㅕㅡdmf 랙ansd ksdptj rkwudha 개ㅐㅡnum에 대한 사진 조회. 그 사진을 photolist에 넣음 
 		List<String>photoList = new ArrayList<>();
 		
 		for(ReserveDto reserve:list) {  //list의 수만큼 반복. reserve 가 결국 i가 됨
