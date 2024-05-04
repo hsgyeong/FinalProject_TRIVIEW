@@ -35,8 +35,8 @@ public class NaverMemberService implements NaverMemberServiceInter {
 		final String reqUrl = "https://nid.naver.com/oauth2.0/token";  //액세스 토큰을 요청할 네이버의 엔드포인트 url 지정
 		
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();  //post 요청에 사용할 매개변수를 저장할 리스트 생성
-		postParams.add(new BasicNameValuePair("client_id", "HGSZO2Y2v6oIfhPXDCxu"));  // 액세스 토큰 요청에 필요한 매개변수들을 생성하고 리스트에 추가함 
-		postParams.add(new BasicNameValuePair("client_secret", "IRLj_NcV1v"));
+		postParams.add(new BasicNameValuePair("client_id", "client_id넣기"));  // 액세스 토큰 요청에 필요한 매개변수들을 생성하고 리스트에 추가함 
+		postParams.add(new BasicNameValuePair("client_secret", "client_secret넣기"));
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("state", state));
 		postParams.add(new BasicNameValuePair("code", authorization_code));

@@ -13,8 +13,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="code"/>
 		<list key="findhistory">
+			<item value="code"/>
 			<item value="let"/>
 			<item value="maven"/>
 			<item value="oauth2"/>
@@ -29,7 +30,6 @@
 			<item value="logged"/>
 			<item value="logoutBtn"/>
 			<item value="get"/>
-			<item value="nick"/>
 		</list>
 		<list key="replacehistory">
 			<item value="userInfo"/>

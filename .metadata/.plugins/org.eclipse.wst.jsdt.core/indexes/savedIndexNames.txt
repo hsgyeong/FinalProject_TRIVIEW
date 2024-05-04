@@ -3,6 +3,5 @@ INDEX VERSION 1.4+C:\Users\sksk0\Desktop\FinalProject\sist_FinalProject\.metadat
 4163607888.index
 3031100912.index
 2454129969.index
-2833077727.index
 2779337602.index
 2228540546.index

@@ -60,7 +60,7 @@ public class KakaoMemberService implements KakaoMemberServiceInter {
 			StringBuilder sb = new StringBuilder();  //요청할 매개변수들을 StringBuilder에 추가함
 		
 			sb.append("grant_type=authorization_code");		
-			sb.append("&client_id=f74ba8d7ae81ba39d038f11c32d7c6ae");
+			sb.append("&client_id=client_id넣기");
 			sb.append("&redirect_uri=http://localhost:9000/login/kakao-member");
 			sb.append("&code="+authorization_code);
 		
@@ -216,9 +216,8 @@ public class KakaoMemberService implements KakaoMemberServiceInter {
 		}
 		return returnNode;
 	}
-
-	@Override
-	public void kakaoUnlink(int kakao_id, String access_token) {
+*/
+/*	public void kakaoUnlink(int kakao_id, String access_token) {
 		// TODO Auto-generated method stub
 		String reqURL = "https://kapi.kakao.com/v1/user/unlink";
 	

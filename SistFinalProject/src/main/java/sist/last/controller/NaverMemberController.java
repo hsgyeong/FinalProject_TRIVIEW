@@ -54,7 +54,7 @@ public class NaverMemberController {
 		StringBuffer url = new StringBuffer();     //url을 구성하기 위한 stringbuffer 객체를 생성함
 		url.append("https://nid.naver.com/oauth2.0/authorize?");
 		url.append("response_type=code");
-		url.append("&client_id=HGSZO2Y2v6oIfhPXDCxu");
+		url.append("&client_id=클라이언트아이디 넣기");
 		url.append("&state="+state);
 		url.append("&redirect_uri=http://localhost:9000/login/naver-member");
 	

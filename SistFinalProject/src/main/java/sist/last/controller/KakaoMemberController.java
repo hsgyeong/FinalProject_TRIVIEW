@@ -40,7 +40,7 @@ public class KakaoMemberController {
 		 String access_token = kakaoMemberService.getAccessToken(code);     //kakaoMemberServiceInter.getAccessToken(code)를 호출하여 카카오로부터 받은 code를 사용해 접근 토큰을 얻음
 
 		 HashMap<String, Object> userInfo = kakaoMemberService.getUserInfo(access_token);      //kakaoMemberService.getuserInfo(access_token)을 호출하여 해당 토큰을 이용해 카카오 회원 정보를 얻기
-		 //System.out.println("userInfo==== "+userInfo); //userInfo==== {kakao_id=121201221, kakao_nickname=홍성경}
+		 //System.out.println("userInfo==== "+userInfo); //userInfo==== {kakao_id="...", kakao_nickname=홍성경}
 	 
 		 String info_nickname = (String)userInfo.get("kakao_nickname");
 		 String info_id = (String) userInfo.get("kakao_id");
@@ -98,7 +98,7 @@ public class KakaoMemberController {
 		if(access_token != null && !"".equals(access_token)) {
 			kakaoMemberService.kakaoLogout(access_token);
 			session.removeAttribute("access_token");
-		//	session.removeAttribute("userId");
+			session.removeAttribute("userId");
 			session.removeAttribute("info_nickname");
 			session.removeAttribute("loginok");
 		}else {
@@ -107,8 +107,8 @@ public class KakaoMemberController {
 		} 
 		return "redirect:/";
 	}
-
-/*	@RequestMapping(value="/logout/kakaounlink")
+/*
+	@RequestMapping(value="/logout/kakaounlink")
  	public String KakaoUnlink(HttpSession session) {
  		String access_token = (String) session.getAttribute("access_token");
  		Integer kakaoId = (Integer) session.getAttribute("kakao_id");
@@ -123,5 +123,5 @@ public class KakaoMemberController {
  		session.invalidate();
  		return "redirect:/";
  	}
- */
+*/
 } 
